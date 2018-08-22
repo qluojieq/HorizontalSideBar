@@ -29,6 +29,7 @@ public class HorizontalSideBar extends View {
     int choose = 1;
     int letterOffset = textSize/2; // 字间距
     int viewHeight = 2*textSize;
+    OnChooseChangeListener onChooseChangeListener;
 
     public HorizontalSideBar(Context context) {
         this(context,null);
@@ -123,7 +124,7 @@ public class HorizontalSideBar extends View {
                 }
                 invalidate();
                 if (oldChoose!= choose){
-                    Log.e(TAG,"改变了");
+                    onChooseChangeListener.chooseLetter(letters[choose]);
                 }
                 break;
         }
@@ -139,5 +140,12 @@ public class HorizontalSideBar extends View {
         this.letters = letters;
         invalidate();
         requestLayout();
+    }
+    interface OnChooseChangeListener{
+        void chooseLetter(String letter);
+    }
+
+    public void setOnChooseChangeListener(OnChooseChangeListener onChooseChangeListener) {
+        this.onChooseChangeListener = onChooseChangeListener;
     }
 }

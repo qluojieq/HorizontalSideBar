@@ -2,11 +2,13 @@ package com.yydrobo.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HorizontalSideBar.OnChooseChangeListener{
 
 
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     HorizontalSideBar sideBar;
     @Override
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sideBar = findViewById(R.id.sliderBar);
+        sideBar.setOnChooseChangeListener(this);
     }
 
     public void changeLetters(View view) {
@@ -22,5 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeLettersBack(View view) {
         sideBar.setLetters(new String[]{"#", "A","B","C","D","E","F","G","H","I"},0);
+    }
+
+    @Override
+    public void chooseLetter(String letter) {
+        Log.e(TAG,"当前选择的字母 " + letter);
     }
 }
